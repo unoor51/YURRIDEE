@@ -56,9 +56,9 @@
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Email</th>
-                                                    <th>Mobile</th>
                                                     <th>Profile</th>
                                                     <th>Cnic</th>
+                                                    <th>Verified</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -68,7 +68,6 @@
                                                 <tr>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td>{{ $user->mobile }}</td>
                                                     <td>
                                                         @if(!empty($user->profile))
                                                             <img src="{{ asset('storage/users/'.$user->profile)}}" height="100px" width="100px" alt="Any alt text"/>
@@ -80,7 +79,19 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                       
+                                                        @if($user->status == 1 )
+                                                            <span class="label label-success">yes</span>
+                                                        @else
+                                                            <span class="label label-danger">No</span>
+
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($user->status == 0)
+                                                            <a href="{{route('verifyUser',encrypt($user->id)) }}" class="btn btn-success">Verify</a>
+                                                        @endif
+                                                       <a href="#" class="btn btn-info">Edit</a>
+                                                       <a href="{{route('deleteUser',encrypt($user->id)) }}" class="btn btn-danger" onclick="return confirm('Are you sure? You want to delete this user!');" >Delete</button>
                                                     </td>
                                                 </tr>
                                                 @endforeach

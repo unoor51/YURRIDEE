@@ -16,6 +16,7 @@
     <script src="{{ asset('assets/js/jquery.sparkline.min.js') }}"></script>
     <!-- This is data table -->
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    
     <!--bootstrap-wysihtml5 JavaScript -->
     <script src="{{ asset('assets/js/wysihtml5-0.3.0.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-wysihtml5.js') }}"></script>

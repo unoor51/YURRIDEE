@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-wysihtml5.css') }}" />
     <!-- select 2  -->
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+
     <!-- Custom CSS -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <!-- Styles -->

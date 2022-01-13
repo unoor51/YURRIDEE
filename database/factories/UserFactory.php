@@ -15,7 +15,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $filePath = storage_path('app/public/users/');
+
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),

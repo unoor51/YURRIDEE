@@ -23,5 +23,7 @@ Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLog
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 //Admin Dashboard routes
-Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 Route::get('/admin/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users');
+Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+Route::get('/admin/users/verify/{id}', [App\Http\Controllers\Admin\UserController::class, 'verifyUser'])->name('verifyUser');
+Route::get('/admin/users/delete/{id}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('deleteUser');

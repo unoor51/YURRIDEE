@@ -86,5 +86,25 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $id = decrypt($id);
+        $user = User::find($id)->delete();
+        return redirect('admin/users')->with('status', 'User Deleted Successfully');
+
+    }
+    /**
+     * Verify User by the admin.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function verifyUser($id)
+    {
+        //
+        $id = decrypt($id);
+        $user = User::find($id);
+        $user->status = 1;
+        $user->save();
+
+        return redirect('admin/users')->with('status', 'User Verified Successfully');
     }
 }
