@@ -27,3 +27,5 @@ Route::get('/admin/users', [App\Http\Controllers\Admin\UserController::class, 'i
 Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 Route::get('/admin/users/verify/{id}', [App\Http\Controllers\Admin\UserController::class, 'verifyUser'])->name('verifyUser');
 Route::get('/admin/users/delete/{id}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('deleteUser');
+Route::get('/admin/users/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('editUser');
+Route::post('/admin/users/update', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('updateUser');

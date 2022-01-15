@@ -90,7 +90,7 @@
                                                         @if($user->status == 0)
                                                             <a href="{{route('verifyUser',encrypt($user->id)) }}" class="btn btn-success">Verify</a>
                                                         @endif
-                                                       <a href="#" class="btn btn-info">Edit</a>
+                                                       <a href="{{route('editUser',encrypt($user->id)) }}" class="btn btn-info">Edit</a>
                                                        <a href="{{route('deleteUser',encrypt($user->id)) }}" class="btn btn-danger" onclick="return confirm('Are you sure? You want to delete this user!');" >Delete</button>
                                                     </td>
                                                 </tr>

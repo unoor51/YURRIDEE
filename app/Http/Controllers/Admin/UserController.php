@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Storage;
 class UserController extends Controller
 {
     /**
@@ -63,6 +63,11 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $id = decrypt($id);
+        $data['title'] = 'Edit User';
+        $data['active'] = 'users';
+        $data['user'] = User::find($id);
+        return view('admin.users.edit',$data);
     }
 
     /**
@@ -72,9 +77,41 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id = decrypt($request->id);
+        $validated = $request->validate([
+            'name' => 'required',
+            'mobile' => 'required',
+        ]);  
+        
+        $user = User::find($id);
+        if($user){
+            if ($request->hasFile('profile')) {
+
+                $validated = $request->validate([
+                    'profile' => 'mimes:jpg,jpeg,png' // Only allow .jpg, .bmp and .png file types.
+                ]);
+                if(Storage::exists('app/public/users/'.$user->profile)){
+                    Storage::delete('app/public/users/'.$user->profile);
+                }
+                $request->profile->store('users', 'public');
+                $file_name = $request->profile->hashName();
+                $user->profile = $file_name;
+            }
+            $user->name = $request->get('name');
+            $user->mobile = $request->get('mobile');
+
+            $user->save();
+            return redirect('admin/users')->with('status', 'User data updated Successfully');
+        }else{
+            return redirect('admin/users')->with('status', 'Incorrect User');
+
+        }
+
+
+
     }
 
     /**

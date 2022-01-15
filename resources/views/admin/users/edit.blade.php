@@ -11,14 +11,14 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h4 class="text-themecolor">Edit Company</h4>
+                    <h4 class="text-themecolor">Edit User</h4>
                 </div>
                 <div class="col-md-7 align-self-center text-right">
                     <div class="d-flex justify-content-end align-items-center">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item "><a href="{{ route('companies') }}">Companies</a> </li>
-                            <li class="breadcrumb-item ">Edit Company </li>
+                            <li class="breadcrumb-item "><a href="{{ route('users') }}">Users</a> </li>
+                            <li class="breadcrumb-item ">Edit User </li>
                         </ol>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <!-- ============================================================== -->
                 <!-- Info box Content -->
                 <!-- ============================================================== -->
-                <form method="post" action="{{ route('update') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('updateUser') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
 
@@ -43,11 +43,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                       <input type="hidden" name="id" value="{{$company->id}}">
+                                       <input type="hidden" name="id" value="{{encrypt($user->id) }}">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="name"> {{ __('Company Name') }}  </label>
-                                                <input type="text" value="{{$company->name}}" name="name" class="form-control" placeholder="{{__('Please enter company name')}}">
+                                                <label for="name"> {{ __('Name') }}  </label>
+                                                <input type="text" value="{{$user->name}}" name="name" class="form-control" placeholder="{{__('Please enter user name')}}">
                                                  @error('name')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -55,35 +55,35 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="email"> {{ __('Company Email') }}  </label>
-                                                <input type="text" name="email" value="{{$company->email}}" class="form-control" placeholder="{{__('Please enter email')}}">
+                                                <label for="email"> {{ __('Email') }}  </label>
+                                                <input type="text" name="email" value="{{$user->email}}" class="form-control" placeholder="{{__('Please enter email')}}" disabled="disabled">
                                                 @error('email')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
-                                        
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="registration_no"> {{ __('Company Registration#') }}  </label>
-                                                <input type="text" value="{{$company->registration_no}}" name="registration_no" class="form-control" placeholder="{{__('Please enter company registration no')}}">
+                                                <label for="phone"> {{ __('Phone') }}  </label>
+                                                <input type="text" name="mobile" value="{{$user->mobile}}" class="form-control" placeholder="{{__('Please enter Mobile No')}}" >
+                                                @error('phone')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
-                                            @error('registration_no')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="logo"> {{ __('Company Logs') }}  </label>
-                                                <input type="file" class="form-control" name="logo" >
+                                                <label for="profile"> {{ __('Profile Picture') }}  </label>
+                                                <input type="file" class="form-control" name="profile" >
                                             </div>
-                                            @error('logo')
+                                            @error('profile')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-sm-6">
-                                            <img src="{{ asset('storage/companies/'.$company->logo)}}" height="100px" width="100px" alt="Any alt text"/>
-                                            <input type="hidden" name="old_logo" value="{{$company->logo}}">
+                                            @if(!empty($user->profile))
+                                                <img src="{{ asset('storage/users/'.$user->profile)}}" height="100px" width="100px" alt="Any alt text"/>
+                                            @endif
                                         </div>
 
                                         <div class="col-sm-12">
