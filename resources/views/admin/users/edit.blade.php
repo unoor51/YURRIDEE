@@ -1,3 +1,6 @@
+@php
+    use App\Models\User;
+@endphp
 @extends('layouts.app')
 
 @section('content')
@@ -11,18 +14,17 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h4 class="text-themecolor">Edit Company</h4>
+                    <h4 class="text-themecolor">Edit user</h4>
                 </div>
                 <div class="col-md-7 align-self-center text-right">
                     <div class="d-flex justify-content-end align-items-center">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item "><a href="{{ route('companies') }}">Companies</a> </li>
-                            <li class="breadcrumb-item ">Edit Company </li>
+                            <li class="breadcrumb-item ">Edit User</li>
                         </ol>
                     </div>
                 </div>
-            </div> 
+            </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -34,7 +36,16 @@
                 <!-- ============================================================== -->
                 <!-- Info box Content -->
                 <!-- ============================================================== -->
-                <form method="post" action="{{ route('update') }}" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <form method="post" action="{{ route('updateUser') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
 
@@ -43,11 +54,11 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                       <input type="hidden" name="id" value="{{$company->id}}">
+                                       <input type="hidden" name="id" value="{{$user->id}}">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="name"> {{ __('Company Name') }}  </label>
-                                                <input type="text" value="{{$company->name}}" name="name" class="form-control" placeholder="{{__('Please enter company name')}}">
+                                                <label for="name"> {{ __('Name') }}  </label>
+                                                <input type="text" value="{{$user->name}}" name="name" class="form-control" placeholder="{{__('Please enter name')}}">
                                                  @error('name')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -55,26 +66,66 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="email"> {{ __('Company Email') }}  </label>
-                                                <input type="text" name="email" value="{{$company->email}}" class="form-control" placeholder="{{__('Please enter email')}}">
+                                                <label for="email"> {{ __('Email') }}  </label>
+                                                <input type="text" name="email" value="{{$user->email}}" class="form-control" placeholder="{{__('Please enter email')}}">
                                                 @error('email')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
-                                        
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="registration_no"> {{ __('Company Registration#') }}  </label>
-                                                <input type="text" value="{{$company->registration_no}}" name="registration_no" class="form-control" placeholder="{{__('Please enter company registration no')}}">
+                                                <label for="user_type"> {{ __('Type') }}  </label>
+                                                <select name="user_type" id="" class="form-control">
+                                                    @foreach (User::USERS_TYPES as $userType)
+                                                    @php
+                                                    if ($userType == $user->user_type){
+                                                        $selectType = 'selected';
+                                                    } else {
+                                                        $selectType = '';
+                                                    }
+                                                    @endphp
+                                                    <option value="{{ $userType }}" {{ $selectType }}>
+                                                        {{ $userType }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('type')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
-                                            @error('registration_no')
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="mobile"> {{ __('Mobile Number') }}  </label>
+                                                <input type="text" value="{{$user->mobile}}" name="mobile" class="form-control" placeholder="{{__('Please enter mobile no')}}">
+                                            </div>
+                                            @error('mobile_no')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="logo"> {{ __('Company Logs') }}  </label>
+                                                <label for="country_code"> {{ __('Country Code') }} </label>
+                                                <input type="text" value="{{$user->country_code}}" name="country_code" class="form-control" placeholder="{{__('Please enter country code')}}">
+                                            </div>
+                                            @error('country_code')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="password"> {{ __('Password') }} </label>
+                                                <input type="text" value="" name="password" class="form-control" placeholder="{{__('Please enter Password')}}">
+                                            </div>
+                                            @error('password')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        {{-- <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="logo"> {{ __('Logs') }}  </label>
                                                 <input type="file" class="form-control" name="logo" >
                                             </div>
                                             @error('logo')
@@ -82,9 +133,9 @@
                                             @enderror
                                         </div>
                                         <div class="col-sm-6">
-                                            <img src="{{ asset('storage/companies/'.$company->logo)}}" height="100px" width="100px" alt="Any alt text"/>
-                                            <input type="hidden" name="old_logo" value="{{$company->logo}}">
-                                        </div>
+                                            <img src="{{ asset('storage/companies/'.$user->logo)}}" height="100px" width="100px" alt="Any alt text"/>
+                                            <input type="hidden" name="old_logo" value="{{$user->logo}}">
+                                        </div> --}}
 
                                         <div class="col-sm-12">
                                             <div class="form-group">
