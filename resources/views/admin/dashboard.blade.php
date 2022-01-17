@@ -76,12 +76,60 @@
                         </div>
                     </div>
                     <!-- Column -->
+            </div>
+            
+            <!-- charts -->
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Rides Graph</div>
+                        <div class="panel-body">
+                            <canvas id="canvas" height="200" width="600"></canvas>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <!-- charts -->
+
         </div>
 
     </div>
     <!-- ============================================================== -->
     <!-- End Page wrapper  -->
     <!-- ============================================================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script>
+        var year = ['2015','2016','2017','2018','2019','2020','2021','2022','2023'];
+        var user = ['10','20','30','40','50','80'];
+        var barChartData = {
+            labels: year,
+            datasets: [{
+                label: 'Rides',
+                backgroundColor: "blue",
+                data: user
+            }]
+        };
 
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    elements: {
+                        rectangle: {
+                            borderWidth: 2,
+                            borderColor: '#c1c1c1',
+                            borderSkipped: 'bottom'
+                        }
+                    },
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Area wise ride'
+                    }
+                }
+            });
+        };
+    </script>
 @endsection
