@@ -33,7 +33,7 @@
                 <!-- ============================================================== -->
                 <!-- Info box Content -->
                 <!-- ============================================================== -->
-            
+
                 <div class="row">
                     <div class="col-md-12">
                         @if (session('status'))
@@ -50,7 +50,7 @@
                         <div class="card">
                             <div class="card-body">
                                     <div class="table-responsive">
-                                        
+
                                         <table id="myTable" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>

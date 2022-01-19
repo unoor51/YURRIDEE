@@ -13,7 +13,7 @@
                             <div class="dropdown-menu animated flipInY">
                                 <!-- text-->
                                 <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                                
+
                                 <div class="dropdown-divider"></div>
                                 <!-- text-->
                                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
@@ -30,12 +30,12 @@
                 <nav class="sidebar-nav">
                      <ul id="sidebarnav">
                         <li> <a class="waves-effect waves-dark @if($active == 'dashboard') active @endif " href="{{ route('dashboard') }}" aria-expanded="false"><i class="fa fa-dashboard"></i><span class="hide-menu">Dashboard </span></a>
-                            
+
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark @if($active == 'users') active @endif""  href="javascript:void(0)" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Users </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('users') }}">Users </a></li>
-                                <li><a href="#">Add User</a></li>
+                                <li><a href="{{ route('createUser') }}">Add User</a></li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark @if($active == 'routes')active @endif" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-car"></i><span class="hide-menu">Routes </span></a>

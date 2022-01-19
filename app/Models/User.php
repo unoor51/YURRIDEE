@@ -41,4 +41,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @var CONST
+     */
+    const RIDER_USER_TYPE = 'rider';
+    const DRIVER_USER_TYPE = 'driver';
+    const SUPER_ADMIN_USER_TYPE = 'super_admin';
+
+
+    /**
+     * @var CONST
+     */
+    const USERS_TYPES = [
+        self::RIDER_USER_TYPE,
+        self::DRIVER_USER_TYPE,
+        self::SUPER_ADMIN_USER_TYPE
+    ];
 }

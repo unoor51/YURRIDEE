@@ -99,14 +99,19 @@
     <!-- ============================================================== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script>
-        var year = ['2015','2016','2017','2018','2019','2020','2021','2022','2023'];
-        var user = ['10','20','30','40','50','80'];
+        var year = ['Baldia','Bin Qasim','Gulberg','Gulshan','Jamshed','Korangi','Kemari','Klifton'];
+        var male = ['10','20','30','40','50','80'];
+        var female = ['5','23','20','50','70','65'];
         var barChartData = {
             labels: year,
             datasets: [{
-                label: 'Rides',
+                label: 'Male',
                 backgroundColor: "blue",
-                data: user
+                data: male
+            },{
+                label: 'Female',
+                backgroundColor: "pink",
+                data: female
             }]
         };
 

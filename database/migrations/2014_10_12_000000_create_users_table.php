@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 class CreateUsersTable extends Migration
 {
@@ -19,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->tinyInteger('user_type')->default(0);
+            $table->enum('user_type', User::USERS_TYPES)->default(User::RIDER_USER_TYPE);
             $table->string('password');
             $table->string('country_code')->nullable();
             $table->string('picture')->nullable();
